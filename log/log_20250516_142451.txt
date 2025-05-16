@@ -1,0 +1,10 @@
+{"event": "fmzanflkkh", "status": "error", "timestamp": "2025-05-16T14:24:51.326483", "value": 361.78, "user": "6emwf6uv"}
+{"event": "asosrywviv", "status": "ok", "timestamp": "2025-05-16T14:24:51.327435", "value": 667.65, "user": "fse659e9"}
+{"event": "ozbqfhqdin", "status": "ok", "timestamp": "2025-05-16T14:24:51.327435", "value": 318.19, "user": "d0sy1jbv"}
+{"event": "ebnaanjdna", "status": "warning", "timestamp": "2025-05-16T14:24:51.327435", "value": 15.51, "user": "c9i9aw5w"}
+{"event": "ransnjlrvh", "status": "error", "timestamp": "2025-05-16T14:24:51.327435", "value": 510.47, "user": "msdgfkms"}
+{"event": "hmkvwxhfes", "status": "ok", "timestamp": "2025-05-16T14:24:51.389978", "value": 828.08, "user": "09b35c4j"}
+{"event": "wbgrkgdklp", "status": "warning", "timestamp": "2025-05-16T14:24:51.389978", "value": 440.72, "user": "sb3gg7sa"}
+{"event": "oqzzijpmhx", "status": "error", "timestamp": "2025-05-16T14:24:51.389978", "value": 556.83, "user": "g29v7d37"}
+{"event": "sjjwblsgnb", "status": "ok", "timestamp": "2025-05-16T14:24:51.390477", "value": 986.82, "user": "qv4sxz0o"}
+{"event": "owtnywwqvq", "status": "warning", "timestamp": "2025-05-16T14:24:51.390477", "value": 526.3, "user": "d1ncxckh"}

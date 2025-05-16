@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  flume:
+    build: .
+    container_name: flumes
+    ports:
+      - "44444:44444"  
+    volumes:
+      - ./flume.conf:/opt/flume/conf/flume.conf
+      - ./log:/flume/log
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+
+volumes:
+  mongo_data:
