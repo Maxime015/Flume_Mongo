@@ -1,71 +1,68 @@
 
-    # 📦 Projet de Simulation Big Data avec Flume, MongoDB et Flask
+# 📦 Projet de Simulation Big Data avec Flume, MongoDB et Flask
 
-    ## 🧠 Objectif du Projet
+## 🧠 Objectif du Projet
 
-    Ce projet permet de :
-    - Générer massivement des logs aléatoires
-    - Les faire transiter via Apache Flume
-    - Les stocker dans MongoDB
-    - Les visualiser dynamiquement via Flask + Chart.js
-    - Et les explorer via MongoDB Compass
+Ce projet a pour but de simuler un pipeline d’ingestion de données en continu, typique des architectures **Big Data temps réel**. Il permet de :
 
-    C’est une architecture orientée **ingestion de données en continu**, typique des systèmes Big Data.
+- Générer un grand volume de logs aléatoires
+- Les acheminer via **Apache Flume**
+- Les stocker efficacement dans **MongoDB**
+- Les visualiser dynamiquement grâce à **Flask** et **Chart.js**
+- Les explorer en profondeur via **MongoDB Compass**
 
+---
 
+## 🔁 Architecture du Pipeline
 
-    ## 🔁 Pipeline Global
-
-
-    Python (sendlogs.py) 
+```text
+Python (sendlogs.py)
         ↓ (TCP)
-    Flume (Netcat source) 
+Apache Flume (source Netcat)
         ↓ (Sink → fichiers)
-    Fichiers (dans /flume/log)
+Fichiers (/flume/log)
         ↓
-    Script Python (insertToMongo.py)
+Python (insertToMongo.py)
         ↓
-    MongoDB
+MongoDB
         ↓
-    Flask Dashboard (Chart.js)
+Flask + Chart.js (Dashboard)
+```
 
+---
 
+## 🧱 Composants et Rôles
 
+### ✅ 1. Docker (optionnel mais recommandé)
+- Simplifie le déploiement des services Flume, MongoDB et Flask
+- Utilisation d’un fichier `docker-compose.yml` pour tout orchestrer automatiquement
 
-      🧱 Composants et Rôles
+### ✅ 2. Apache Flume
+- Agent d’ingestion configuré avec :
+  - Une **source Netcat** (port `44444`) recevant les logs via TCP
+  - Un **sink `file_roll`** écrivant les logs dans `/flume/log`
 
-      ✅ 1. Docker (optionnel mais recommandé)
-    - Permet de lancer les services Flume, MongoDB, Flask facilement
-    - Permet d’utiliser un `docker-compose.yml` pour tout automatiser
+### ✅ 3. MongoDB + Script Python
+- Le script `insertToMongo.py` lit les fichiers générés par Flume
+- Insère les logs en **batch** dans MongoDB via `insert_many` pour plus d'efficacité
 
-      ✅ 2. Apache Flume
-    - Agent d’ingestion de données
-    - Source `netcat` (port 44444) qui reçoit des logs via TCP
-    - Sink `file_roll` qui écrit les logs dans `/flume/log`
+### ✅ 4. MongoDB Compass
+- Interface graphique pour **explorer, trier et filtrer** les données insérées
 
-      ✅ 3. MongoDB + Script Python
-    - Le script `insertToMongo.py` lit les fichiers Flume et insère les logs dans MongoDB
-    - Utilise `insert_many` pour insérer efficacement par lots
+### ✅ 5. Dashboard Flask + Chart.js
+- Une API REST (`/api/data`) expose les données pour le frontend
+- Interface web responsive avec :
+  - 📈 Un graphique linéaire : nombre d’événements par minute
+  - 🥧 Un graphique circulaire : répartition des logs par statut
+- Mise à jour automatique toutes les **10 secondes**
 
-      ✅ 4. MongoDB Compass
-    - Interface visuelle pour naviguer et filtrer les données dans MongoDB
+---
 
-      ✅ 5. Flask + Chart.js Dashboard
-    - Flask expose une API `/api/data` pour regrouper les logs
-    - Le frontend (Chart.js + TailwindCSS) affiche :
-      - Un graphique linéaire (événements/minute)
-      - Un graphique circulaire (répartition par statut)
-    - Interface responsive, rafraîchie automatiquement toutes les 10 secondes
+## 📊 Résumé
 
+Ce projet constitue un socle idéal pour :
 
-
-
-     📊 Résumé
-
-    Ce projet permet de :
-
-    - Simuler des flux **massifs** de logs
-    - Observer leur ingestion temps réel
-    - Visualiser leur état dans un dashboard moderne
-    - Étendre facilement vers des technologies Big Data plus avancées
-
+- Simuler des flux **massifs et continus** de données
+- Tester et observer les mécanismes d’ingestion temps réel
+- Visualiser l’état des données via un **dashboard moderne**
+- Étendre facilement le système vers des solutions plus avancées (Kafka, Spark, Elastic, etc.)
